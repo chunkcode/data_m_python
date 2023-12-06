@@ -52,10 +52,10 @@ WSGI_APPLICATION = 'datam.wsgi.application'
 DATABASES = {
     'default': {
          'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'datam_db',
+        'NAME': 'data_db',
         'USER': 'postgres',
         'PASSWORD': 'Pass@123',
-        'HOST': 'localhost',
+        'HOST': '13.234.208.246',
         'PORT': '5432',
     }
 }

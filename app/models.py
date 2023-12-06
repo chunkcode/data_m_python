@@ -7,13 +7,13 @@ class Plan(models.Model):
     
 class User(models.Model):
     username = models.CharField(max_length=250,primary_key=True,unique=True)
+    name = models.CharField(max_length=250)
     email = models.CharField(max_length=250,unique=True)
     password = models.CharField(max_length=250)
     mobile = models.CharField(max_length=100)
     subscribed = models.BooleanField(default=False)
     role = models.CharField(max_length=100, default='user')
     company =  models.CharField(max_length=250)
-    plan = models.ForeignKey(Plan,on_delete=models.CASCADE)
 
 class Category(models.Model):
     name = models.CharField(max_length=250,unique=True)
@@ -48,4 +48,23 @@ class Access(models.Model):
     started_date = models.DateField()
     validity_date = models.DateField()
     
-    
+class AccountRequest(models.Model):
+    name = models.CharField(max_length=250)
+    email = models.CharField(max_length=250)
+    password = models.CharField(max_length=250)
+    mobile = models.CharField(max_length=100)
+    company =  models.CharField(max_length=250)
+    requested_date = models.DateField(auto_now_add=True)
+
+class PlanRequest(models.Model):
+    category = models.ForeignKey(Category,on_delete=models.CASCADE)
+    subcategory = models.ForeignKey(SubCategory,on_delete=models.CASCADE)
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    requested_date = models.DateField(auto_now_add=True)
+    plan = models.ForeignKey(Plan,on_delete=models.CASCADE)
+
+class ReportRequest(models.Model):
+    report = models.ForeignKey(Report,on_delete=models.CASCADE)
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    requested_date = models.DateField(auto_now_add=True)
+    message = models.TextField()
