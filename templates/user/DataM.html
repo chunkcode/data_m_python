@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    {% load static %}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+   
+    <title>DataM</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="{% static 'DataM_files/app.js.download' %}" defer=""></script>
+    <link rel="dns-prefetch" href="http://fonts.gstatic.com/">
+    <link href=" {% static 'DataM_files/css' %}" rel="stylesheet">
+    <link rel="stylesheet" href=" {% static 'DataM_files/all.min.css' %}" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link href=" {% static 'DataM_files/app.css' %}" rel="stylesheet">
+    <link href=" {% static 'DataM_files/main.css' %}" rel="stylesheet">
+    <script src="{% static 'DataM_files/htmx.min.js.download'  %}"></script>
+<script type="text/javascript" charset="UTF-8" src=" {% static 'DataM_files/loader.js.download' %}"></script><style>                      .htmx-indicator{opacity:0;transition: opacity 200ms ease-in;}                      .htmx-request .htmx-indicator{opacity:1}                      .htmx-request.htmx-indicator{opacity:1}                    </style><link id="load-css-0" rel="stylesheet" type="text/css" href="./DataM_files/tooltip.css"><link id="load-css-1" rel="stylesheet" type="text/css" href="./DataM_files/util.css"><script type="text/javascript" charset="UTF-8" src="./DataM_files/jsapi_compiled_default_module.js.download"></script><script type="text/javascript" charset="UTF-8" src="./DataM_files/jsapi_compiled_graphics_module.js.download"></script><script type="text/javascript" charset="UTF-8" src="./DataM_files/jsapi_compiled_ui_module.js.download"></script><script type="text/javascript" charset="UTF-8" src="./DataM_files/jsapi_compiled_corechart_module.js.download"></script><script type="text/javascript" charset="UTF-8" src="./DataM_files/jsapi_compiled_fw_module.js.download"></script><script type="text/javascript" charset="UTF-8" src="./DataM_files/dygraph-tickers-combined.js.download"></script><script type="text/javascript" charset="UTF-8" src="./DataM_files/webfont.js.download"></script><script type="text/javascript" charset="UTF-8" src="./DataM_files/jsapi_compiled_bar_module.js.download"></script></head>
+<body>
+    <div id="app">
+        <nav class="navbar navbar-expand-md shadow-sm">
+            <div class="container-fluid px-5" style="background-color: #083E5E;">
+                <a class="navbar-brand bg-white" href="{% url 'home' %}">
+                    <img src=" {% static 'DataM_files/logo.png' %}" width="100" alt="">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                   
+                    <ul class="navbar-nav me-auto">
+
+                    </ul>
+
+                    <ul class="navbar-nav ms-auto">
+                        
+                                                                                    <li class="nav-item">
+                                    <a class="nav-link text-white" href="{% url 'login' %}">Login</a>
+                                </li>
+                            
+                                                            <li class="nav-item">
+                                    <a class="nav-link text-white" href="{% url 'register' %}">Subscribe</a>
+                                </li>
+                                                                        </ul>
+                </div>
+            </div>
+        </nav>
+
+        <main class="py-4">
+            <div class="container ">
+  <div class="row justify-content-center ">
+    <div class="card bg-white " style="border: none;">
+      <div class="card-body ">
+        <section class="section1">
+          <div class="row py-5 px-5">
+            <div class="col-md-6">
+              <img src="{% static 'DataM_files/banner.jpg'%}" alt="Image" class="img-fluid">
+            </div>
+            <div class="col-md-6 px-5 d-flex justify-content-center align-items-start flex-column gap-5">
+              <div>
+                <h1 style="font-size: 36px;color: #083F5F; font-weight: 600;">DataM Intelligence...</h1>
+              </div>
+              <div>
+                <p class="" style="font-size: 20px;color: #083F5F;">“At DMI, we ensure your business decisions are
+                  remarkable with our Extensive Research and
+                  Profound Cognizance in the market
+                  research industry.”</p>
+              </div>
+              <div class="d-md-flex justify-content-between align-items-center gap-3">
+                
+                <a type="button" class="btn px-5 " href="{% url 'login' %}" style="background-color: #083F5F; border-radius: 30px; color: #E5EEF6;">
+                  Login
+                </a>
+                <div class="login d-flex justify-content-center" style="background-color: #083F5F; border-radius: 30px; width: 150px;">
+                  <a type="button" class="btn text-white" href="{% url 'register' %}">Subscribe</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </section>
+        <div class="line"></div>
+
+       
+        <section class="section2">
+          <div class="row py-5 px-5">
+            <div class="col-md-6 d-flex align-items-center">
+              <div class="text-left">
+                <h1 class="mb-4" style="font-size: 36px; color: #083F5F;"><b>Our reports</b></h1>
+                <p style="font-size: 20px; color: #083F5F;">As a firm with rich research and consulting experience across multiple domains, we are a one-stop solution that will cater to clients' needs in key business areas</p>
+              </div>
+            </div>
+            <div class="col-md-6 d-flex justify-content-center">
+              <img src="{% static 'DataM_files/laptop.jpg'%}" alt="Image 2" class="img-fluid">
+            </div>
+
+            
+            <div class="graph" style="width: 100%;">
+              <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+              <div id="chart_div"></div>
+              <script>
+                google.charts.load('current', {
+                  packages: ['corechart', 'bar']
+                });
+                google.charts.setOnLoadCallback(drawBasic);
+
+                function drawBasic() {
+                  var data = new google.visualization.DataTable();
+                  data.addColumn('string', 'Type');
+                  data.addColumn('number', 'Reports');
+                  data.addRows(["On Demand Reports",2],["Published Reports",44],["Upcoming Reports",2]);
+
+                  var options = {
+                    title: '',
+                    chartArea: {
+                      width: '70%'
+                    },
+                    hAxis: {
+                      title: '',
+                      minValue: 0,
+                      textStyle: {
+                        color: '#083F5F',
+                        fontName: 'Arial',
+                        fontSize: 10,
+                      }
+                    },
+                    vAxis: {
+                      title: '',
+                      textStyle: {
+                        color: '#083F5F',
+                      },
+                    },
+                    series: {
+                      0: {
+                        color: '#083F5F'
+                      },
+                    },
+                    bars: 'vertical',
+                    bar: {
+                      groupWidth: '30%'
+                    },
+                    legend: 'none',
+                    animation: {
+                      startup: true,
+                      duration: 1500 // 1000 milliseconds (1 second) animation duration
+                    }
+                  };
+
+                  var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
+
+                  function resizeChart() {
+                    var container = document.getElementById('chart_div');
+                    var chartArea = container.clientWidth * 0.7;
+                    chartArea = Math.max(chartArea, 300);
+                    options.chartArea.width = chartArea;
+                    chart.draw(data, options);
+                  }
+
+                  window.addEventListener('resize', resizeChart);
+
+                  chart.draw(data, options);
+                }
+              </script>
+            </div>
+
+
+          </div>
+        </section>
+        <div class="line"></div>
+
+        
+        <section class="section3">
+
+          <div class="row px-5 d-flex justify-content-between">
+            <div class="col-md-6 py-5 mt-5">
+              <div class="row d-flex justify-content-between align-items-center" style="color: #083F5F;">
+                <div class="col">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="35%" height="35%" fill="currentColor" class="bi bi-people-fill" viewBox="0 0 16 16">
+                    <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6m-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5"/>
+                  </svg>
+                  <p><b>100</b></p>
+                </div>
+                <div class="col">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="35%" height="35%" fill="currentColor" class="bi bi-newspaper" viewBox="0 0 16 16">
+                    <path d="M0 2.5A1.5 1.5 0 0 1 1.5 1h11A1.5 1.5 0 0 1 14 2.5v10.528c0 .3-.05.654-.238.972h.738a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 1 1 0v9a1.5 1.5 0 0 1-1.5 1.5H1.497A1.497 1.497 0 0 1 0 13.5zM12 14c.37 0 .654-.211.853-.441.092-.106.147-.279.147-.531V2.5a.5.5 0 0 0-.5-.5h-11a.5.5 0 0 0-.5.5v11c0 .278.223.5.497.5z"/>
+                    <path d="M2 3h10v2H2zm0 3h4v3H2zm0 4h4v1H2zm0 2h4v1H2zm5-6h2v1H7zm3 0h2v1h-2zM7 8h2v1H7zm3 0h2v1h-2zm-3 2h2v1H7zm3 0h2v1h-2zm-3 2h2v1H7zm3 0h2v1h-2z"/>
+                  </svg>
+                  <p><b>48</b></p>
+                </div>
+                <div class="col">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="35%" height="35%" fill="currentColor" class="bi bi-bar-chart-fill" viewBox="0 0 16 16">
+                    <path d="M1 11a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1zm5-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1zm5-5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1z"/>
+                  </svg>
+                  <p><b>16</b></p>
+                </div>
+              </div>
+              
+              
+            </div>
+            <div class="col-md-5 p-5">
+              <div class="card" style="background-color: #083F5F; border-radius: 10px;">
+                <div class="card-body" style="max-height: 320px; overflow-y: auto;">
+                  <h1 class="mb-4" style="font-size: 36px; font-weight: 600; color: white;">MISSION ONE</h1>
+                  <p style="color: white; font-size: 18px;">“To empower clients with advanced Research &amp; Consulting services that will enhance their competitiveness across different geographies in their respective industry domains, which in turn enable them to meet their business goals.“</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+
+        </section>
+
+        <div class="line"></div>
+
+        <div class="custom d-flex py-5 px-5 align-items-center text-center flex-column gap gap-5">
+          <h2 class="custom-heading" style="font-size: 40px;">CUSTOM RESEARCH</h2>
+          <p style="font-size: 20px;">DMI's custom research services typically deal with the creation of tailored and client-centric reports. Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis perspiciatis nobis doloremque ad explicabo tempore blanditiis quidem itaque molestiae, molestias quasi cupiditate non minima quod pariatur obcaecati atque corrupti. Repellendus.</p>
+        </div>
+
+        <div class="line"></div>
+        
+        <section class="section4">
+
+
+          <div class="col-md-12 d-flex justify-content-between row px-5 py-5">
+            <div class="col-md-6 ">
+              {% load static %}
+              <img src="{% static 'DataM_files/benefits.png' %}" alt="" class="img-fluid">
+            </div>
+            <div class="col-md-5 d-flex justify-content-center align-items-center flex-column gap-5">
+              <div class="d-md-flex">
+                <div class="d-md-flex justify-content-center align-items-center" style="background-color: #083F5F; border-radius: 30px;">
+                  <h3 class="text-white d-flex justify-content-center align-items-center py-2 px-5 ">Benefits for Clients</h3>
+                </div>
+              </div>
+              <div>
+              
+                <p style="font-size: 20px;color:#083F5F; ">In the realm of business, data and insights are paramount for making well-informed decisions. DelveInsight stands at the forefront, offering the most actionable market data within the industry. Our mission is to extend the reach of this invaluable data to a broader audience through our platform.</p>
+              </div>
+
+              <div class="col-sm-12 justify-content-center align-items-center gap gap-5">
+                <div class="d-md-flex justify-content-between align-items-center gap-5">
+                  
+                  <a type="button" class="btn px-5 " href="{% url 'login' %}" style="background-color: #083F5F; border-radius: 30px; color: #E5EEF6;">
+                    Login
+                  </a>
+                  <div class="login d-flex justify-content-center" style="background-color: #083F5F; border-radius: 30px; width: 150px;">
+                    <a type="button" class="btn text-white" href="{% url 'register' %}">Subscribe</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </section>
+
+        <div class="line"></div>
+
+
+        <section class="section4">
+          <div class="container py-5 px-5 d-flex justify-content-center align-items-center flex-column text-center gap-5" style="color: #083F5F;">
+            <div class="">
+              <h2><b>Partners &amp; Supporters</b></h2>
+              <h3>Benefits of Collaborating with Our Organization</h3>
+            </div>
+            <div class="row d-flex justify-content-between align-items-center">
+              <div class="partner col-12 col-md-3 text-center d-md-flex flex-column gap-3">
+                  <div class="image-container">
+                    <img src="{% static 'DataM_files/pay later.png'%}" alt="" class="img-fluid" style="max-width: 100px;">
+                  </div>
+                <h5 class=""><b>Buy now and pay later</b></h5>
+                <p>We offer flexible payment options, including 'buy now, pay later,' and credit for add-on reports.</p>
+              </div>
+              <div class="partner col-12 col-md-3 text-center d-md-flex flex-column gap-3">
+                  <div class="image-container">
+                      <img src="{% static 'DataM_files/dashboard.png'%}" alt="" class="img-fluid" style="max-width: 100px;">
+                  </div>
+                <h5 class=""><b>Personalized Dashboard</b></h5>
+                <p>We offer a client-focused interface customized to their needs. Our dynamic Excel model enables effortless data manipulation and simulation.</p>
+              </div>
+              <div class="partner col-12 col-md-3 text-center d-md-flex flex-column gap-3">
+                  <div class="image-container">
+                      <img src="{% static 'DataM_files/support.png'%}" alt="" class="img-fluid" style="max-width: 100px;">
+                  </div>
+                  <h5 class=""><b>24/7 Expert Support</b></h5>
+                  <p>We assign one analyst per account for real-time support. Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+              </div>
+            </div>
+          </div>
+      </section></div>
+    </div>
+  </div>
+  
+</div>
+        </main>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+</body></html>
