@@ -7,8 +7,7 @@
     <title>DataM</title>
 {% load static %}
 
-   
-    <script src="{% static 'DataM_files2/app.js.download' %}" defer=""></script>
+<script src="{% static 'DataM_files2/app.js.download' %}" defer=""></script>
 
     
     <link rel="dns-prefetch" href="http://fonts.gstatic.com/">
@@ -16,11 +15,15 @@
     <link rel="stylesheet" href="{% static 'DataM_files2/all.min.css' %}" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer">
 
     <!-- Styles -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
+
     <link href="{% static 'DataM_files2/app.css' %}" rel="stylesheet">
     <link href="{% static 'DataM_files2/main.css' %}" rel="stylesheet">
     <script src="{% static 'DataM_files2/htmx.min.js.download' %}"></script>
 <style>                      .htmx-indicator{opacity:0;transition: opacity 200ms ease-in;}                      .htmx-request .htmx-indicator{opacity:1}                      .htmx-request.htmx-indicator{opacity:1}                    </style></head>
 <body>
+    
+    
     <div id="app">
         <nav class="navbar navbar-expand-md shadow-sm">
             <div class="container-fluid px-5" style="background-color: #083E5E;">
@@ -36,16 +39,16 @@
                     <ul class="navbar-nav me-auto">
 
                     </ul>
-
+     
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
                         <!-- Authentication Links -->
                                                                                     <li class="nav-item">
-                                    <a class="nav-link text-white" href="http://34.196.17.69/login">Login</a>
+                                    <a class="nav-link text-white" href="{% url "login" %}">Login</a>
                                 </li>
                             
                                                             <li class="nav-item">
-                                    <a class="nav-link text-white" href="http://34.196.17.69/register">Subscribe</a>
+                                    <a class="nav-link text-white" href="{% url "register" %}">Subscribe</a>
                                 </li>
                                                                         </ul>
                 </div>
@@ -55,13 +58,28 @@
         <main class="py-4">
             <div class="container">
     <div class="row justify-content-center">
+       
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">Subscribe</div>
+                
+               {% if messages %}
 
+               <ul >
+                   {% for message in messages %}
+                   <div class="alert alert-success" role="alert">
+                    {{message}}
+                  </div>
+                    
+                 
+                   
+           
+                   {% endfor %}
+               </ul>
+               {% endif %}
                 <div class="card-body">
-                    <form method="POST" action="http://34.196.17.69/register">
-                        <input type="hidden" name="_token" value="rhdZ0g3hgY4sIAnQhRaAzJuUFlieGlDABbYBbfWR">
+                    <form method="POST" action="{% url "register" %}">
+                        {% csrf_token %}
                         <div class="row mb-3">
                             <label for="name" class="col-md-4 col-form-label text-md-end">Name</label>
 

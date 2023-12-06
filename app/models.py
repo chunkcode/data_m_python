@@ -54,6 +54,7 @@ class AccountRequest(models.Model):
     password = models.CharField(max_length=250)
     mobile = models.CharField(max_length=100)
     company =  models.CharField(max_length=250)
+    phone =  models.CharField(max_length=250)
     requested_date = models.DateField(auto_now_add=True)
 
 class PlanRequest(models.Model):
@@ -68,3 +69,7 @@ class ReportRequest(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     requested_date = models.DateField(auto_now_add=True)
     message = models.TextField()
+
+class Otp(models.Model):
+    mail = models.TextField()
+    otp = models.IntegerField()
