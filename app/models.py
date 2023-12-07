@@ -45,21 +45,26 @@ class User(AbstractBaseUser):
     
 
 class Plan(models.Model):
+    id = models.AutoField(primary_key=True) 
     plan_name = models.CharField(max_length=250)
     validity_days = models.IntegerField()  
 
 class Category(models.Model):
+    id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=250,unique=True)
     icon = models.CharField(max_length=250)
     
 class SubCategory(models.Model):
+    id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=250,unique=True)
     icon = models.CharField(max_length=250)
 
 class ReportType(models.Model):
+    id = models.AutoField(primary_key=True)
     type = models.CharField(max_length=250)
     
 class Report(models.Model):
+    id = models.AutoField(primary_key=True)
     title = models.TextField()
     detail = models.TextField()
     report_type = models.ForeignKey(ReportType, on_delete=models.CASCADE)
@@ -70,11 +75,13 @@ class Report(models.Model):
     excel = models.CharField(max_length=250)
 
 class News(models.Model):
+    id = models.AutoField(primary_key=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     title = models.TextField()
     detail = models.TextField()
     
 class Access(models.Model):
+    id = models.AutoField(primary_key=True)
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     category = models.ForeignKey(Category,on_delete=models.CASCADE)
     subcategory = models.ForeignKey(SubCategory,on_delete=models.CASCADE)
@@ -82,6 +89,7 @@ class Access(models.Model):
     validity_date = models.DateField()
     
 class AccountRequest(models.Model):
+    id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=250)
     email = models.CharField(max_length=250)
     company =  models.CharField(max_length=250)
@@ -89,6 +97,7 @@ class AccountRequest(models.Model):
     requested_date = models.DateField(auto_now_add=True)
 
 class PlanRequest(models.Model):
+    id = models.AutoField(primary_key=True)
     category = models.ForeignKey(Category,on_delete=models.CASCADE)
     subcategory = models.ForeignKey(SubCategory,on_delete=models.CASCADE)
     user = models.ForeignKey(User,on_delete=models.CASCADE)
@@ -96,11 +105,13 @@ class PlanRequest(models.Model):
     plan = models.ForeignKey(Plan,on_delete=models.CASCADE)
 
 class ReportRequest(models.Model):
+    id = models.AutoField(primary_key=True)
     report = models.ForeignKey(Report,on_delete=models.CASCADE)
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     requested_date = models.DateField(auto_now_add=True)
     message = models.TextField()
 
 class Otp(models.Model):
+    id = models.AutoField(primary_key=True)
     mail = models.TextField()
     otp = models.IntegerField()

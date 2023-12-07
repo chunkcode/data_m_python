@@ -1,16 +1,28 @@
 from django.shortcuts import render,redirect,HttpResponse
-from django.views.decorators.csrf import csrf_exempt
 from django_ratelimit.decorators import ratelimit
 from django.contrib import messages
 from .models import *
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate,logout
 from django.contrib.auth import login as auth_login
+from app.pwd import getpass
+from django.views.decorators.cache import never_cache
+
 def landing(request):
  return render(request,'user/landing.html')
 
+def logout_view(request):
+ session_keys = list(request.session.keys())
+ for key in session_keys:
+   del request.session[key]
+ print(session_keys)
+ logout(request)
+ return redirect('home')
 @ratelimit(key='ip', rate='5/m',method='POST', block=True)
+@never_cache
 def login(request):
+ if request.user.is_authenticated:
+  return redirect('home')
  if request.method == 'POST':    
   username = request.POST.get('email')
   password = request.POST.get('password')
@@ -19,16 +31,18 @@ def login(request):
    auth_login(request,user)
    if user.is_staff:
     if user.is_superuser:
-     return redirect('manager_dashboard')
+     return redirect('admin_dashboard')
     else:
      return redirect('manager_dashboard')     
-   elif user.role == "user":
+   else:
      return redirect('home')
-       
+  messages.error(request,'Please provide valid credentials !')
+  return render(request,'user/login.html')
  return render(request,'user/login.html')
 
 
 @ratelimit(key='ip', rate='3/m', block=True)
+@never_cache
 def register(request):
  if request.POST:
   name =  request.POST['name']
@@ -69,10 +83,28 @@ def home(request):
 
 @login_required(login_url='login')
 def manager_dashboard(request):
-    
-    return render(request,'user/manager_dashboard.html')
+ if request.user.is_staff:
+  return render(request,'user/manager_dashboard.html')
 
 @login_required(login_url='login')
 def admin_dashboard(request):
-    
-    return render(request,'user/admin_dashboard.html')
+ if request.user.is_superuser:
+  return render(request,'user/admin_dashboard.html')
+
+@login_required(login_url='login')
+def admin_requested_accounts(request):
+ if request.user.is_superuser:
+  accounts = AccountRequest.objects.all()
+  return render(request,'user/admin_requested_accounts.html',{'accounts':accounts})
+
+@login_required(login_url='login')
+def admin_accept_requested_account(request,id):
+ if request.user.is_superuser:
+  account = AccountRequest.objects.get(id= id)
+  psw = getpass()
+  print(psw)
+  User.objects.create_user(  account.email,psw ,username = account.email ,name=account.name ,
+       company = account.company ,mobile = account.phone,
+       role = "user", subscribed = True, 
+       )
+  return render(request,'user/admin_accept_requested_account.html')
