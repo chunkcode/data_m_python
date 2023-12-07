@@ -5,8 +5,9 @@ from .models import *
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate,logout
 from django.contrib.auth import login as auth_login
-from app.pwd import getpass
+from app.pwd import getpass,add_pdf,add_ppt,add_excel
 from django.views.decorators.cache import never_cache
+
 
 def landing(request):
  return render(request,'user/landing.html')
@@ -17,7 +18,7 @@ def logout_view(request):
    del request.session[key]
  print(session_keys)
  logout(request)
- return redirect('home')
+ return redirect('landing')
 @ratelimit(key='ip', rate='5/m',method='POST', block=True)
 @never_cache
 def login(request):
@@ -85,26 +86,71 @@ def home(request):
 def manager_dashboard(request):
  if request.user.is_staff:
   return render(request,'user/manager_dashboard.html')
+ messages.error(request,"Access denied !")
+ logout_view(request)
+ return redirect('home')
 
 @login_required(login_url='login')
 def admin_dashboard(request):
  if request.user.is_superuser:
   return render(request,'user/admin_dashboard.html')
+ messages.error(request,"Access denied !")
+ logout_view(request)
+ return redirect('home')
 
 @login_required(login_url='login')
 def admin_requested_accounts(request):
  if request.user.is_superuser:
   accounts = AccountRequest.objects.all()
   return render(request,'user/admin_requested_accounts.html',{'accounts':accounts})
+ messages.error(request,"Access denied !")
+ logout_view(request)
+ return redirect('home')
 
 @login_required(login_url='login')
 def admin_accept_requested_account(request,id):
  if request.user.is_superuser:
-  account = AccountRequest.objects.get(id= id)
-  psw = getpass()
-  print(psw)
-  User.objects.create_user(  account.email,psw ,username = account.email ,name=account.name ,
+  try:
+   account = AccountRequest.objects.get(id= id)
+   psw = getpass()
+   print(psw)
+   User.objects.create_user(  account.email,psw ,username = account.email ,name=account.name ,
        company = account.company ,mobile = account.phone,
        role = "user", subscribed = True, 
        )
-  return render(request,'user/admin_accept_requested_account.html')
+   messages.error(request,"Account has been approved.")
+   return redirect('admin_requested_accounts')
+  except:
+   messages.error(request,"Something went wrong !")
+   return redirect('admin_requested_accounts')
+ messages.error(request,"Access denied !")
+ logout_view(request)
+ return redirect('home')
+ 
+@login_required(login_url='login')
+def admin_reject_requested_account(request,id):
+ if request.user.is_superuser:
+  try:
+   account = AccountRequest.objects.get(id= id)
+   account.delete()
+   messages.error(request,"Account has been rejected.")
+   return redirect('admin_requested_accounts')
+  except:
+   messages.error(request,"Something went wrong !")
+   return redirect('admin_requested_accounts')
+ messages.error(request,"Access denied !")
+ logout_view(request)
+ return redirect('home')
+
+
+def admin_add_report(request):
+ if request.POST:
+  doc = request.FILES 
+  pdf = doc['pdf']
+  ppt = request.FILES['power']
+  excel = doc['excel']
+  pdf_name = add_pdf(pdf,12)
+  ppt_name = add_ppt(ppt,12)
+  excel_name = add_excel(excel,12)
+  print(request.POST['title'],request.POST['detail'],pdf_name,ppt_name,excel_name)
+ return render(request,'test.html')

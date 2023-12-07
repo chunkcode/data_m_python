@@ -43,48 +43,63 @@ class User(AbstractBaseUser):
     USERNAME_FIELD = 'email'
     objects = UserManager()
     
+    def __str__(self):
+        return self.name
 
 class Plan(models.Model):
     id = models.AutoField(primary_key=True) 
     plan_name = models.CharField(max_length=250)
     validity_days = models.IntegerField()  
-
+    def __str__(self):
+        return self.plan_name
+    
 class Category(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=250,unique=True)
     icon = models.CharField(max_length=250)
+    def __str__(self):
+        return self.name
     
 class SubCategory(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=250,unique=True)
     icon = models.CharField(max_length=250)
-
+    def __str__(self):
+        return self.name
+    
 class ReportType(models.Model):
     id = models.AutoField(primary_key=True)
     type = models.CharField(max_length=250)
-    
+    def __str__(self):
+        return self.type
+        
 class Report(models.Model):
     id = models.AutoField(primary_key=True)
     title = models.TextField()
-    detail = models.TextField()
+    detail = models.TextField(null=True)
     report_type = models.ForeignKey(ReportType, on_delete=models.CASCADE)
     category = models.ForeignKey(Category,on_delete=models.CASCADE)
-    subcategory = models.ForeignKey(SubCategory,on_delete=models.CASCADE)
-    pdf =  models.CharField(max_length=250)
-    ppt = models.CharField(max_length=250)
-    excel = models.CharField(max_length=250)
-
+    subcategory = models.ForeignKey(SubCategory,on_delete=models.CASCADE,null=True)
+    publish_date = models.DateField(null=True)
+    pdf =  models.CharField(max_length=250,null=True)
+    ppt = models.CharField(max_length=250,null=True)
+    excel = models.CharField(max_length=250,null=True)
+    def __str__(self):
+        return self.title
+    
 class News(models.Model):
     id = models.AutoField(primary_key=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     title = models.TextField()
     detail = models.TextField()
+    def __str__(self):
+        return self.title
     
 class Access(models.Model):
     id = models.AutoField(primary_key=True)
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     category = models.ForeignKey(Category,on_delete=models.CASCADE)
-    subcategory = models.ForeignKey(SubCategory,on_delete=models.CASCADE)
+    subcategory = models.ForeignKey(SubCategory,on_delete=models.CASCADE,null=True)
     started_date = models.DateField()
     validity_date = models.DateField()
     
@@ -115,3 +130,12 @@ class Otp(models.Model):
     id = models.AutoField(primary_key=True)
     mail = models.TextField()
     otp = models.IntegerField()
+
+class DownloadData(models.Model):
+    id = models.AutoField(primary_key=True)
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    report = models.ForeignKey(Report,on_delete=models.CASCADE)
+    category = models.ForeignKey(Category,on_delete=models.CASCADE)
+    latitude = models.CharField(max_length=100)
+    longitude = models.CharField(max_length=100)
+    ip_address = models.CharField(max_length=100)

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="{% url "admin_add_report" %}" method="post"  enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="text" name="title">
+        <input type="text" name="detail">
+        
+        <input type="file" name="pdf" id="pdf" placeholder="pdf">
+        <input type="file" name="power" id="power" placeholder="power">
+        <input type="file" name="excel" id="excel" placeholder="excel">
+        <input type="submit">
+    </form>
+</body>
+</html>

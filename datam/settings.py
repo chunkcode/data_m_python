@@ -64,8 +64,8 @@ DATABASES = {
         'NAME': 'data',
         'USER': 'postgres',
         'PASSWORD': 'Pass@123',
-        # 'HOST': '13.234.208.246',
-        'HOST': 'localhost',
+        'HOST': '13.234.208.246',
+        # 'HOST': 'localhost',
         'PORT': '5432',
     }
 }
@@ -112,3 +112,7 @@ MEDIA_URL ='/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
+PDF_PATH = "media/pdf/"
+PPT_PATH = "media/ppt/"
+EXCEL_PATH = "media/excel/"

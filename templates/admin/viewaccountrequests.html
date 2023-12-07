@@ -1,0 +1,3 @@
+{% for account in accounts %}
+{{account.name}} {{account.email}} {{account.phone}} {{account.company}} {% url "admin_accept_requested_account" account.id%} {% url "admin_reject_requested_account" account.id%}  
+{% endfor %}
