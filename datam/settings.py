@@ -10,16 +10,23 @@ DEBUG = True
 ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
+    
+    'preventconcurrentlogins',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'app'
+    'app',
+    
+    
 ]
 
+AUTH_USER_MODEL = 'app.User'
+
 MIDDLEWARE = [
+    
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -27,7 +34,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'preventconcurrentlogins.middleware.PreventConcurrentLoginsMiddleware',
 ]
+
 
 ROOT_URLCONF = 'datam.urls'
 
@@ -52,10 +61,11 @@ WSGI_APPLICATION = 'datam.wsgi.application'
 DATABASES = {
     'default': {
          'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'data_db',
+        'NAME': 'data',
         'USER': 'postgres',
         'PASSWORD': 'Pass@123',
-        'HOST': '13.234.208.246',
+        # 'HOST': '13.234.208.246',
+        'HOST': 'localhost',
         'PORT': '5432',
     }
 }
