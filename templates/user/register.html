@@ -27,7 +27,7 @@
     <div id="app">
         <nav class="navbar navbar-expand-md shadow-sm">
             <div class="container-fluid px-5" style="background-color: #083E5E;">
-                <a class="navbar-brand bg-white" href="http://34.196.17.69/">
+                <a class="navbar-brand bg-white" href="{% url "home" %}">
                     <img src="{% static 'DataM_files2/logo.png' %}" width="100" alt="">
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -98,7 +98,7 @@
                                                             </div>
                         </div>
 
-                        <div class="row mb-3">
+                        {% comment %} <div class="row mb-3">
                             <label for="password" class="col-md-4 col-form-label text-md-end">Password</label>
 
                             <div class="col-md-6">
@@ -113,7 +113,7 @@
                             <div class="col-md-6">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required="" autocomplete="new-password" fdprocessedid="4u3kw">
                             </div>
-                        </div>
+                        </div> {% endcomment %}
 
                         <div class="row mb-3">
                             <label for="company" class="col-md-4 col-form-label text-md-end">Company</label>

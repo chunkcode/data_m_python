@@ -14,7 +14,9 @@ class User(models.Model):
     subscribed = models.BooleanField(default=False)
     role = models.CharField(max_length=100, default='user')
     company =  models.CharField(max_length=250)
-
+    account_created = models.DateField(auto_now_add=True)
+    toBereset = models.BooleanField(default=True)
+    
 class Category(models.Model):
     name = models.CharField(max_length=250,unique=True)
     icon = models.CharField(max_length=250)
@@ -54,7 +56,6 @@ class AccountRequest(models.Model):
     password = models.CharField(max_length=250)
     mobile = models.CharField(max_length=100)
     company =  models.CharField(max_length=250)
-    phone =  models.CharField(max_length=250)
     requested_date = models.DateField(auto_now_add=True)
 
 class PlanRequest(models.Model):
