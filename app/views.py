@@ -5,7 +5,7 @@ from .models import *
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate,logout
 from django.contrib.auth import login as auth_login
-from app.pwd import getpass,add_pdf,add_ppt,add_excel
+from app.pwd import getpass,add_pdf,add_ppt,add_excel,add_cat_icon
 from django.views.decorators.cache import never_cache
 
 
@@ -142,6 +142,34 @@ def admin_reject_requested_account(request,id):
  logout_view(request)
  return redirect('home')
 
+ 
+def admin_add_cat(request):
+ if request.POST:
+  doc = request.FILES 
+  icon = doc['icon']
+  cat =Category()
+  cat.name = request.POST['cat']
+  cat.icon = ""
+  cat.save()
+  icon_name = add_cat_icon(icon,cat.id)
+  cat.icon = icon_name
+  cat.save()
+ return render(request,'test.html')
+
+def admin_add_sub_cat(request):
+ if request.POST:
+  doc = request.FILES 
+  icon = doc['icon']
+  sub =SubCategory()
+  sub.name = request.POST['sub']
+  sub.category = int(request.POST['sub'])
+  sub.icon = ""
+  sub.save()
+  icon_name = add_cat_icon(icon,sub.id)
+  sub.icon = icon_name
+  sub.save()
+  print("sub done")
+ return render(request,'test.html')
 
 def admin_add_report(request):
  if request.POST:
@@ -154,3 +182,15 @@ def admin_add_report(request):
   excel_name = add_excel(excel,12)
   print(request.POST['title'],request.POST['detail'],pdf_name,ppt_name,excel_name)
  return render(request,'test.html')
+
+
+
+from django.http import FileResponse
+
+def send_file(response):
+
+    img = open('media\ppt\pdf_12.pptx', 'rb')
+
+    response = FileResponse(img)
+    response['Content-Disposition'] = 'attachment; filename="somefilename.pptx"'
+    return response

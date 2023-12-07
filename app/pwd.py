@@ -54,7 +54,7 @@ def add_ppt(post_image,report_id):
      file_name = filearr[0]
      file_ext = filearr[arr_len-1]
 
-     image_name ="pdf_"+str(report_id)+"."+str(file_ext)
+     image_name ="ppt_"+str(report_id)+"."+str(file_ext)
      imagefile = str(image_path)+str(image_name)
     
      with open(imagefile, 'wb+') as destination:
@@ -79,7 +79,58 @@ def add_excel(post_image,report_id):
      file_name = filearr[0]
      file_ext = filearr[arr_len-1]
 
-     image_name ="pdf_"+str(report_id)+"."+str(file_ext)
+     image_name ="excel_"+str(report_id)+"."+str(file_ext)
+     imagefile = str(image_path)+str(image_name)
+    
+     with open(imagefile, 'wb+') as destination:
+       for chunk in post_image.chunks():
+         destination.write(chunk)
+  except Exception as Error:
+   pass
+ return image_name
+
+
+def add_cat_icon(post_image,report_id):
+ image_name = ''
+ image_path = settings.CAT_ICON_PATH
+ if not os.path.exists(image_path):
+  os.makedirs(image_path)
+ image_name = None
+ if post_image != '' and image_path != '' and report_id !='':
+  try:
+   filename = post_image.name
+   filearr = filename.split('.')
+   arr_len = len(filearr)
+   if len(filearr) > 1 :
+     file_name = filearr[0]
+     file_ext = filearr[arr_len-1]
+
+     image_name ="cat_icon_"+str(report_id)+"."+str(file_ext)
+     imagefile = str(image_path)+str(image_name)
+    
+     with open(imagefile, 'wb+') as destination:
+       for chunk in post_image.chunks():
+         destination.write(chunk)
+  except Exception as Error:
+   pass
+ return image_name
+
+def add_sub_cat_icon(post_image,report_id):
+ image_name = ''
+ image_path = settings.SUB_CAT_ICON_PATH
+ if not os.path.exists(image_path):
+  os.makedirs(image_path)
+ image_name = None
+ if post_image != '' and image_path != '' and report_id !='':
+  try:
+   filename = post_image.name
+   filearr = filename.split('.')
+   arr_len = len(filearr)
+   if len(filearr) > 1 :
+     file_name = filearr[0]
+     file_ext = filearr[arr_len-1]
+
+     image_name ="sub_cat_icon_"+str(report_id)+"."+str(file_ext)
      imagefile = str(image_path)+str(image_name)
     
      with open(imagefile, 'wb+') as destination:

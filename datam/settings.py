@@ -116,3 +116,5 @@ SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 PDF_PATH = "media/pdf/"
 PPT_PATH = "media/ppt/"
 EXCEL_PATH = "media/excel/"
+CAT_ICON_PATH = "media/cat_icon/"
+SUB_CAT_ICON_PATH = "media/sub_cat_icon/"

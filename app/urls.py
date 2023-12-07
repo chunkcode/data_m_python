@@ -13,6 +13,9 @@ urlpatterns = [
     path('admin_accept_requested_account/<int:id>/', admin_accept_requested_account, name='admin_accept_requested_account'),
     path('admin_reject_requested_account/<int:id>/', admin_reject_requested_account, name='admin_reject_requested_account'),
     path('admin_add_report/', admin_add_report, name='admin_add_report'),
+    path('admin_add_cat/', admin_add_cat, name='admin_add_cat'),
+    path('admin_add_sub_cat/', admin_add_sub_cat, name='admin_add_sub_cat'),
+    path('send_file/', send_file, name='send_file'),
     
 ]
 
