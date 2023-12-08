@@ -142,6 +142,30 @@ def admin_reject_requested_account(request,id):
  logout_view(request)
  return redirect('home')
 
+def admin_report_type(request):
+ if request.user.is_superuser:
+  reports = ReportType.objects.all()
+
+def admin_add_report_type(request):
+ if request.user.is_superuser:
+  try:
+   if request.POST:
+    type = ReportType()
+    type.type = request.POST['report_type']
+    type.save()
+   return render(request,'admin/admin_add_report_type.html')
+  except:
+    messages.error(request,"Something went wrong !")
+    return redirect('admin_requested_accounts')
+
+def admin_edit_report_type(request,id):
+ if request.POST:
+  type = ReportType(id = id)
+  type.type = request.POST['report_type']
+  type.save()
+ type = ReportType(id = id)
+ context = {'report_type':type}
+ return render(request,'admin/admin_edit_report_type.html',context=context)
  
 def admin_add_cat(request):
  if request.POST:
@@ -154,7 +178,20 @@ def admin_add_cat(request):
   icon_name = add_cat_icon(icon,cat.id)
   cat.icon = icon_name
   cat.save()
- return render(request,'test.html')
+ return render(request,'admin/admin_add_cat.html')
+
+def admin_edit_cat(request,id):
+ if request.POST:
+  doc = request.FILES 
+  cat = Category(id = id)
+  if doc['icon']:
+   icon = doc['icon']
+   cat.icon = add_cat_icon(icon,cat.id)
+  cat.name = request.POST['cat']
+  cat.save()
+ cat = Category(id = id)
+ context = {'cat':cat}
+ return render(request,'admin/admin_edit_cat.html',context=context)
 
 def admin_add_sub_cat(request):
  if request.POST:
@@ -169,20 +206,67 @@ def admin_add_sub_cat(request):
   sub.icon = icon_name
   sub.save()
   print("sub done")
- return render(request,'test.html')
+ return render(request,'admin/admin_add_sub_cat.html')
+
+def admin_edit_sub_cat(request,id):
+ if request.POST:
+  doc = request.FILES 
+  sub =SubCategory(id = id)
+  if doc['icon']:
+   icon = doc['icon']
+   sub.icon = add_cat_icon(icon,sub.id)
+  sub.name = request.POST['sub']
+  sub.category = int(request.POST['sub'])
+  sub.save()
+  print("sub done")
+ sub_cat = SubCategory(id = id)
+ context = {'sub_cat':sub_cat}
+ return render(request,'admin/admin_edit_sub_cat.html',context=context)
 
 def admin_add_report(request):
  if request.POST:
-  doc = request.FILES 
-  pdf = doc['pdf']
-  ppt = request.FILES['power']
-  excel = doc['excel']
-  pdf_name = add_pdf(pdf,12)
-  ppt_name = add_ppt(ppt,12)
-  excel_name = add_excel(excel,12)
-  print(request.POST['title'],request.POST['detail'],pdf_name,ppt_name,excel_name)
- return render(request,'test.html')
+  doc = request.FILES
+  report = Report() 
+  if doc['pdf']: 
+   pdf = doc['pdf']
+   report.pdf = add_pdf(pdf,12)
+  if request.FILES['power']:
+   ppt = request.FILES['power']
+   report.ppt = add_ppt(ppt,12)
+  if doc['excel']:
+   excel = doc['excel']
+   report.excel = add_excel(excel,12)
+  report.title = request.POST['title']
+  report.detail = request.POST['detail']
+  report.report_type = request.POST['report_type']
+  report.category = request.POST['cat']
+  report.subcategory = request.POST['sub']
+  report.publish_date = request.POST['pub_date']
+ return render(request,'admin/admin_add_report.html')
 
+def admin_edit_report(request,id):
+ if request.POST:
+  doc = request.FILES
+  report = Report.objects.get(id = id)
+  if doc['pdf']: 
+   pdf = doc['pdf']
+   report.pdf = add_pdf(pdf,12)
+  if request.FILES['power']:
+   ppt = request.FILES['power']
+   report.ppt = add_ppt(ppt,12)
+  if doc['excel']:
+   excel = doc['excel']
+   report.excel = add_excel(excel,12)
+  report.title = request.POST['title']
+  report.detail = request.POST['detail']
+  report.report_type = request.POST['report_type']
+  report.category = request.POST['cat']
+  report.subcategory = request.POST['sub']
+  report.publish_date = request.POST['pub_date']
+  print("DONE")
+ report = Report(id = id)
+ context = {'report':report}
+ return render(request,'admin/admin_edit_report.html',context=context)
 
 
 from django.http import FileResponse
